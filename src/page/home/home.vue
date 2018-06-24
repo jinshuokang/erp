@@ -3,16 +3,16 @@
         <head-top>
         </head-top>
         <section class="index">
-            <div class="tip">
+            <div class="tip" v-show="welcome">
                 <span>欢迎您进入账随行</span>
-                <img class="to-close" src="../../imgs/close.png" alt=""/>
+                <img class="to-close" src="@/assets/imgs/close.png" @click="welcome = false" alt=""/>
             </div>
             <div class="menu clearfix">
                 <router-link :to="{ name: 'goods' }">
                     <div class="dl-parent">
                         <dl class="to-list">
                             <dt>
-                                <img src="../../imgs/icon_take.png" alt=""/>
+                                <img src="@/assets/imgs/icon_take.png" alt=""/>
                             </dt>
                             <dd class="title">货单</dd>
                             <dd>查看货单详细信息</dd>
@@ -23,7 +23,7 @@
                     <div class="dl-parent">
                         <dl class="to-list">
                             <dt>
-                                <img src="../../imgs/icon_bill.png" alt=""/>
+                                <img src="@/assets/imgs/icon_bill.png" alt=""/>
                             </dt>
                             <dd class="title">账单</dd>
                             <dd>整合货单 了解账目</dd>
@@ -34,7 +34,7 @@
                     <div class="dl-parent">
                         <dl class="to-more">
                             <dt>
-                                <img class="three" src="../../imgs/icon_report.png" alt=""/>
+                                <img class="three" src="@/assets/imgs/icon_report.png" alt=""/>
                             </dt>
                             <dd class="title">报表</dd>
                             <dd>分析统计 生成报告</dd>
@@ -45,7 +45,7 @@
                     <div class="dl-parent">
                         <dl class="to-more">
                             <dt>
-                                <img class="four" src="../../imgs/icon_manage.png" alt=""/>
+                                <img class="four" src="@/assets/imgs/icon_manage.png" alt=""/>
                             </dt>
                             <dd class="title">管理</dd>
                             <dd>统一设置货点功能</dd>
@@ -63,7 +63,7 @@
     export default {
         data() {
             return {
-
+                welcome: true, // 欢迎提示
             }
         },
         components: {
@@ -119,17 +119,15 @@
         }
     }
     .menu dl {
-        width: 100%;
+        @include wh(100%, 0);
         padding-bottom:160%;
-        height: 0;
     }
     .menu dl dt {
         width: 100%;
         text-align: center;
     }
     .menu dl dt img {
-        width: 144px;
-        height: 141px;
+        @include wh(144px, 141px);
         margin: 26% 0 7% 0;
     }
     .menu dl dd {

@@ -1,43 +1,50 @@
 <template>
     <header class="clearfix">
 		<router-link :to="{ name: 'home' }">
-			<img class="table-sign" src="../imgs/table_sign.png" alt="sign"/>
+			<img class="table-sign" src="@/assets/imgs/table_sign.png" alt="sign"/>
 		</router-link>
         <div class="header-title">
             <div class="title-name">
-                <img src="../imgs/icon_title.png" alt=""/>
+                <img src="@/assets/imgs/icon_title.png" alt=""/>
             </div>
             <div class="title-text">
-                <img src="../imgs/icon_text.png" alt=""/>
+                <img src="@/assets/imgs/icon_text.png" alt=""/>
             </div>
         </div>
+		<!-- 不同页面不同头部按钮 -->
+		<!-- header 共用退出登陆 -->
 		<router-link :to="{ name: 'login' }">
-			<img id="logOutBtn" class="list-derive" @click="loginOut" src="../imgs/logout.png" alt="">
+			<img id="logOutBtn" class="list-derive" @click="loginOut" src="@/assets/imgs/logout.png" alt="">
 		</router-link>
-		<div id="excelBtn" class="import-dropdown" v-show="importBtn">
-			<img class="list-derive" src="../imgs/icon_derive.png" alt="">
-			<ul class="import-item">
-				<li data-value="0">
-					<label for="import_file">导入数据</label>
-					<input type="file" id="import_file">
-				</li>
-				<li data-value="1" @click="templateDownload">模版下载</li>
-			</ul>
-		</div>
-		<!-- 不同页面不同头部按钮  -->
-		<slot name="goodsSearch"></slot>
-		<slot name="time"></slot>
-		<slot name="search"></slot>
+		<!-- header 货单导入下拉 -->
+		<slot name="importBtn"></slot>
+		<!-- header 货单搜索 -->
+		<slot name="goodsSearchBtn"></slot>
+		<!-- header 共用时间 headerTime 定义显示与否-->
+		<el-date-picker
+			v-show="headerTime"
+			@change="getTime"
+			class="header-time"
+			slot="time"
+			v-model="time"
+			type="datetimerange"
+			range-separator="至"
+			start-placeholder="开始日期"
+			end-placeholder="结束日期"
+			format="yyyy-MM-dd H:mm">
+		</el-date-picker>
+		<!-- header 货单搜索下拉框 -->
+		<slot name="goodsSearchInput"></slot>
     </header>
 </template>
 
 <script>
 	import { mapMutations } from 'vuex'
     export default {
-		props: ['importBtn'],
+		props: ['headerTime'],
         data() {
             return {
-				//printBtn: false
+				time: [new Date() - ( 3600 * 24 * 1000 ), +new Date()]
             }
         },
         computed: {
@@ -47,8 +54,9 @@
 			...mapMutations([
 				'RECORD_LOGINOUT'
 			]),
-			templateDownload() {
-				this.$emit('templateDownload');
+			getTime() {
+				alert(this.time);
+				this.$emit('getTime', this.time);
 			},
 			loginOut() {
 				this.RECORD_LOGINOUT();

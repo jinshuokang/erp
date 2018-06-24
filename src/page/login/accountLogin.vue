@@ -1,21 +1,21 @@
 <template>
     <div class="login">
         <div class="login-side">
-            <img class="side-img" src="../../imgs/icon_side.jpg" alt="side"/>
-            <img class="side-icon" src="../../imgs/icon_sign.png" alt="icon"/>
+            <img class="side-img" src="@/assets/imgs/icon_side.jpg" alt="side"/>
+            <img class="side-icon" src="@/assets/imgs/icon_sign.png" alt="icon"/>
         </div>
         <div class="login-content">
             <div class="login-detail">
                 <div class="login-title">
                     <div class="login-left">
-                        <img class="left-img" src="../../imgs/icon_sign.png" alt="icon"/>
+                        <img class="left-img" src="@/assets/imgs/icon_sign.png" alt="icon"/>
                     </div>
                     <div class="login-right">
                         <div class="right-title">
-                            <img src="../../imgs/login_title.png" alt="">
+                            <img src="@/assets/imgs/login_title.png" alt="">
                         </div>
                         <div class="right-text">
-                            <img src="../../imgs/login_text.png" alt="">
+                            <img src="@/assets/imgs/login_text.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -28,9 +28,9 @@
                     <input id="password" type="password" v-model="password" placeholder="请输入密码"/>
                 </div>
                 <button class="to-login" id="login_btn" @click="login" @keydown.enter="login">登录</button>
-                <p class="backlogo"><router-link :to="{ name: 'login', params: { phone: this.phone } }">短信验证码登录</router-link>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<router-link :to="{ name: 'forget', params: { phone: this.phone } }">忘记密码？</router-link></p>
+                <p class="backlogo"><router-link :to="{ name: 'login', query: { phone: this.phone } }">短信验证码登录</router-link>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<router-link :to="{ name: 'forget', query: { phone: this.phone } }">忘记密码？</router-link></p>
             </div>
-            <img class="copyright" src="../../imgs/icon_copyright.png"/>
+            <img class="copyright" src="@/assets/imgs/icon_copyright.png"/>
         </div>
     </div>
 </template>
@@ -41,7 +41,7 @@
     export default {
         data() {
             return {
-                phone: this.$route.params.phone || '', // 手机号码
+                phone: this.$route.query.phone || '', // 手机号码
                 password: '', // 密码
                 userInfo:'', //记录用户信息
             }

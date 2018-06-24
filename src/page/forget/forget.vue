@@ -1,6 +1,6 @@
 <template>
     <div class="forget">
-        <div class="forget-logo"><img src="../../imgs/forget-logo.png"/></div>
+        <div class="forget-logo"><img src="@/assets/imgs/forget-logo.png"/></div>
         <div class="forget-wrap">
             <div class="forget-wrap-auto">
                 <div class="login-phone">
@@ -22,7 +22,7 @@
                     <input type="password" placeholder="请确认新密码" v-model="newPassword2" id="surenewpass"/>
                 </div>
                 <button class="to-login" @click="modifyPassword" @keydown.enter="modifyPassword">确定</button>
-                <p class="backlogo"><router-link :to="{ name: 'accountLogin', params: {phone: this.phone} }">返回登录</router-link></p>
+                <p class="backlogo"><router-link :to="{ name: 'accountLogin', query: {phone: this.phone} }">返回登录</router-link></p>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
     export default {
         data() {
             return {
-                phone: this.$route.params.phone || '',
+                phone: this.$route.query.phone || '',
                 verify: '',
                 newPassword: '',
                 newPassword2: '',
@@ -76,7 +76,7 @@
                         })
                         setTimeout(resolve, 1500);
                     }).then(function(){
-                        this.$router.push({ name: 'accountLogin', params: { phone: this.phone } })
+                        this.$router.push({ name: 'accountLogin', query: { phone: this.phone } })
                     })
                 }else{
                     this.$message.error( res.message );
@@ -117,7 +117,7 @@
         position: relative;
         @include wh(100%, 100%);
         min-height:620px;
-        background: #fff url(../../imgs/forget-bg.png) no-repeat;
+        background: #fff url(~@/assets/imgs/forget-bg.png) no-repeat;
         background-position:bottom;
         background-size:100% auto;
     }
