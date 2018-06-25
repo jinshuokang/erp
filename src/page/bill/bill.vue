@@ -1,39 +1,40 @@
 <template>
     <div id="bill">
-        <head-top headerTime="true" @getTime="getTime">
+        <head-top isHome="true" isHeaderTime="true" @getTime="getTime">
 			<div class="list-search" slot="goodsSearchInput">
                 <img alt="search" src="@/assets/imgs/icon_search.png">
                 <input id="likeParams" type="text" placeholder="品名/批次号/装箱号" @click="filterList = !filterList">
 			</div>
         </head-top>
-    <no-data :totalCount="totalCount">
+        <no-data :totalCount="totalCount">
 
-    </no-data>
+        </no-data>
+        <search-select :filterList="filterList"></search-select>
     </div>
 </template>
 
 <script>
     import headTop from '@/components/header';
     import noData from '@/components/noData';
+    import searchSelect from '@/components/searchSelect'
     import { mapState, mapMutations } from 'vuex';
 
     export default {
         data() {
             return {
-                //headerTime: true, // 显示 时间
 				totalCount: 0, // 总记录数
-				filterList: false,
+				filterList: true,
             }
         },
         components: {
-            headTop, noData
+            headTop, noData, searchSelect
         },
         computed: {
 
         },
         methods: {
             getTime() {
-
+                // TODO: 请求数据
 			}
         }
     }

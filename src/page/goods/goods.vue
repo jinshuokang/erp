@@ -1,6 +1,6 @@
 <template>
     <div class="list" id="goods">
-        <head-top headerTime="true" @getTime="getTime">
+        <head-top isHome="true" isHeaderTime="true" @getTime="getTime">
             <!-- 货单 header 导入 -->
             <div id="excelBtn" class="import-dropdown" slot="importBtn">
                 <img class="list-derive" src="@/assets/imgs/icon_derive.png" alt="">
@@ -71,7 +71,6 @@
     export default {
         data() {
             return {
-                headerTime: true, //是否显示 时间
                 time: '', // 时间
                 tooggleDropDown: false, // 搜索框的下拉框是否显示
                 searchTypeIndex: '0', //搜索框中的 类型
@@ -243,6 +242,7 @@
                 background: #fff;;
                 border: 1px solid #ddd;
                 padding:10px 0;
+                z-index:99;
             }
             .import-item {
                 width:80px;

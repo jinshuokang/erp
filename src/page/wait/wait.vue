@@ -1,6 +1,6 @@
 <template>
     <div class="list">
-        <head-top></head-top>
+        <head-top isHome="true"></head-top>
         <div class="more">
             <img src="@/assets/imgs/icon_more.png" alt=""/>
             <p>敬请期待!</p>

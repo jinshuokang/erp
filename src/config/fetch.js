@@ -1,10 +1,11 @@
-import {
-	baseUrl
-} from './env'
+import { baseUrl } from './env'
+import { getStore, setStore, removeStore } from './untils'
 
-export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
+export default async(url = '', data = {}, type = 'GET', pathType = 2, method = 'fetch') => {
 	type = type.toUpperCase();
-	url = baseUrl + url;
+	let apiPath = '/farmeasy-accountsbao-service';
+	if( pathType == 1 ) apiPath = '/farmeasy-api-gateway/farmeasy-auth-service';
+	url = baseUrl + apiPath + url;
 
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串
@@ -25,14 +26,15 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',
-				/* 询问后端 这俩个请求头是干啥的 */
+				/* 验证相关 */
 				'Platform-Code': '24yypy8pw1xp',
 				'Platform-Secret': '6w6m8v9ihl55dcuafp0ux0zil7yqyuqx'
 			},
 			mode: "cors",
 			cache: "force-cache"
 		}
-
+		let token = getStore('Access-Token');
+		if( token && pathType == 2 ) requestConfig.headers['Access-Token'] = token;
 		if (type == 'POST') {
 			Object.defineProperty(requestConfig, 'body', {
 				value: JSON.stringify(data)
@@ -61,9 +63,12 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 
 			requestObj.open(type, url, true);
 			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			/* 询问后端 这俩个请求头是干啥的 */
+			/* 验证相关 */
 			requestObj.setRequestHeader("Platform-Code", "24yypy8pw1xp");
 			requestObj.setRequestHeader("Platform-Secret", "6w6m8v9ihl55dcuafp0ux0zil7yqyuqx");
+
+			let token = getStore('Access-Token');
+			if( token && pathType == 2 ) requestObj.setRequestHeader('Access-Token', token);
 			requestObj.send(sendData);
 
 			requestObj.onreadystatechange = () => {

@@ -25,9 +25,9 @@
                 </div>
                 <div class="login-phone">
                     <p class="login-label">密码</p>
-                    <input id="password" type="password" v-model="password" placeholder="请输入密码"/>
+                    <input id="password" type="password" v-model="password" placeholder="请输入密码" @keydown.enter="login" />
                 </div>
-                <button class="to-login" id="login_btn" @click="login" @keydown.enter="login">登录</button>
+                <button class="to-login" id="login_btn" @click="login">登录</button>
                 <p class="backlogo"><router-link :to="{ name: 'login', query: { phone: this.phone } }">短信验证码登录</router-link>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<router-link :to="{ name: 'forget', query: { phone: this.phone } }">忘记密码？</router-link></p>
             </div>
             <img class="copyright" src="@/assets/imgs/icon_copyright.png"/>

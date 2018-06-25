@@ -16,13 +16,30 @@
 		<router-link :to="{ name: 'login' }">
 			<img id="logOutBtn" class="list-derive" @click="loginOut" src="@/assets/imgs/logout.png" alt="">
 		</router-link>
+		<div class="home-dropdown" v-show="isHome">
+			<img class="list-drive" src="@/assets/imgs/icon-home.png" alt="">
+			<ul class="home-item">
+				<router-link :to="{ name: 'goods' }">
+					<li>货单</li>
+				</router-link>
+				<router-link :to="{ name: 'bill' }">
+					<li>账单</li>
+				</router-link>
+				<router-link :to="{ name: 'wait' }">
+					<li>报表</li>
+				</router-link>
+				<router-link :to="{ name: 'wait' }">
+					<li>管理</li>
+				</router-link>
+			</ul>
+		</div>
 		<!-- header 货单导入下拉 -->
 		<slot name="importBtn"></slot>
 		<!-- header 货单搜索 -->
 		<slot name="goodsSearchBtn"></slot>
-		<!-- header 共用时间 headerTime 定义显示与否-->
+		<!-- header 共用时间 isHeaderTime 定义显示与否-->
 		<el-date-picker
-			v-show="headerTime"
+			v-show="isHeaderTime"
 			@change="getTime"
 			class="header-time"
 			slot="time"
@@ -41,7 +58,7 @@
 <script>
 	import { mapMutations } from 'vuex'
     export default {
-		props: ['headerTime'],
+		props: ['isHome', 'isHeaderTime'],
         data() {
             return {
 				time: [new Date() - ( 3600 * 24 * 1000 ), +new Date()]
@@ -126,6 +143,7 @@
 		top:60px;
 		display:none;
 		font-size: 14px;
+		z-index: 99;
 		label {
 			cursor: pointer;
 		}
@@ -141,6 +159,41 @@
 		@include wh(1px, 1px);
 		position: fixed;
 		bottom:0;
+	}
+	div.home-dropdown{
+		position: relative;
+		margin-top:18px;
+		height:44px;
+		width: 24px;
+		margin-left: 10px;
+		float: right;
+		cursor: pointer;
+	}
+	div.home-dropdown:hover .home-item{
+		display:inline-block;
+	}
+	.home-item{
+		position: absolute;
+		top:36px;
+		left:45px;
+		width:86px;
+		text-align: center;
+		background: #fff;;
+		border: 1px solid #ddd;
+		padding:10px 0;
+		display: none;
+	}
+	.home-item{
+		width:80px;
+		left:-25px;
+		top:42px;
+	}
+	.home-item li{
+		cursor:pointer;
+		padding:5px 0;
+	}
+	.home-item li:hover{
+		color:#59B5E7;
 	}
 
 </style>

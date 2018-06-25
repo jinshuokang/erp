@@ -26,10 +26,10 @@
                 <div class="login-code">
                     <p class="login-label">验证码</p>
                     <input id="password" type="text" v-model="verify" placeholder="请输入验证码"/>
-                    <button id="send_sms_code" :class="{ right_phone: rightPhone }" v-show="!countdownTime" @click="sendVerify">发送验证码</button>
+                    <button id="send_sms_code" :class="{ right_phone: rightPhone }" v-show="!countdownTime" @click="sendVerify" @keydown.enter="login">发送验证码</button>
                     <button v-show="countdownTime">{{countdownTime}}秒重新发送</button>
                 </div>
-                <button class="to-login" id="login_btn" @click="login" @keydown.enter="login">登录</button>
+                <button class="to-login" id="login_btn" @click="login">登录</button>
                 <p class="backlogo"><router-link :to="{ name: 'accountLogin', query: {phone: this.phone} }">账号密码登录</router-link></p>
             </div>
             <img class="copyright" src="@/assets/imgs/icon_copyright.png"/>

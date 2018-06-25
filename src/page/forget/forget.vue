@@ -19,9 +19,9 @@
                 </div>
                 <div class="login-phone">
                     <p class="login-label">确认密码</p>
-                    <input type="password" placeholder="请确认新密码" v-model="newPassword2" id="surenewpass"/>
+                    <input type="password" placeholder="请确认新密码" v-model="newPassword2" id="surenewpass" @keydown.enter="modifyPassword"/>
                 </div>
-                <button class="to-login" @click="modifyPassword" @keydown.enter="modifyPassword">确定</button>
+                <button class="to-login" @click="modifyPassword">确定</button>
                 <p class="backlogo"><router-link :to="{ name: 'accountLogin', query: {phone: this.phone} }">返回登录</router-link></p>
             </div>
         </div>
